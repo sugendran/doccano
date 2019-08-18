@@ -149,7 +149,7 @@ class Label(models.Model):
         (c, c) for c in string.ascii_lowercase
     )
 
-    text = models.CharField(max_length=100)
+    text = models.CharField(max_length=5000)
     prefix_key = models.CharField(max_length=10, blank=True, null=True, choices=PREFIX_KEYS)
     suffix_key = models.CharField(max_length=1, blank=True, null=True, choices=SUFFIX_KEYS)
     project = models.ForeignKey(Project, related_name='labels', on_delete=models.CASCADE)
