@@ -33,8 +33,8 @@ block annotation-area
               button.delete.is-small(v-on:click="removeLabel(annotation)")
 
       hr
-      div.content(v-if="docs[pageNumber]")
-        span.text {{ docs[pageNumber].text }}
+      div.content
+        div.text.scrollable(ref="textbox", v-if="docs[pageNumber]") {{ docs[pageNumber].text }}
 </template>
 
 <style scoped>
@@ -64,7 +64,7 @@ export default {
 
     async submit() {
       const state = this.getState();
-      this.url = `docs?q=${this.searchQuery}&doc_annotations__isnull=${state}&offset=${this.offset}`;
+      this.url = `docs?q=${this.searchQuery}&doc_annotations__isnull=${state}&offset=${this.offset}&ordering=${this.ordering}`;
       await this.search();
       this.pageNumber = 0;
     },

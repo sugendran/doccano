@@ -21,7 +21,7 @@ block annotation-area
                 kbd {{ shortcutKey(label) | simpleShortcut }}
 
     div.card-content
-      div.content(v-if="docs[pageNumber] && annotations[pageNumber]")
+      div.content.scrollable(v-if="docs[pageNumber] && annotations[pageNumber]", ref="textbox")
         annotator(
           v-bind:labels="labels"
           v-bind:entity-positions="annotations[pageNumber]"
@@ -66,7 +66,7 @@ export default {
 
     async submit() {
       const state = this.getState();
-      this.url = `docs?q=${this.searchQuery}&seq_annotations__isnull=${state}&offset=${this.offset}`;
+      this.url = `docs?q=${this.searchQuery}&seq_annotations__isnull=${state}&offset=${this.offset}&ordering=${this.ordering}`;
       await this.search();
       this.pageNumber = 0;
     },
